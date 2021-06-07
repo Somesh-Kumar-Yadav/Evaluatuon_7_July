@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MENU</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      #nav {
+        height: 50px;
+        background: darkgreen;
+        color: antiquewhite;
+        display: flex;
+        flex-direction: row-reverse;
+      }
+      #nav > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .option {
+        cursor: pointer;
+        margin: 1.5rem;
+      }
+      .option:hover {
+        color: grey;
+      }
+      .list {
+        height: 200px;
+        width: 200px;
+        float: left;
+        margin: 10px;
+        text-align: center;
+      }
+      img {
+        height: 100px;
+        width: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="nav">
+      <div>
+        <p class="option" onclick="login()">LOGIN</p>
+        <p class="option" onclick="signup()">SIGNUP</p>
+        <p class="option">MENU</p>
+      </div>
+    </div>
+    <div id="cont"></div>
+  </body>
+</html>
+<script>
+  function login() {
+    window.location.href = "login.html";
+  }
+  function signup() {
+    window.location.href = "signup.html";
+  }
+  let menu = [
+    {
+      image:
+        "https://content3.jdmagicbox.com/comp/ahmedabad/b1/079pxx79.xx79.190303140011.l8b1/catalogue/sizzling-pizza-maninagar-ahmedabad-pizza-outlets-24pduifh8i.jpg",
+      name: "Burger",
+      description: "Most wanted fast-food",
+      price: "RS. 30",
+      time: "10 min",
+    },
+    {
+      image:
+        "https://content3.jdmagicbox.com/comp/ahmedabad/b1/079pxx79.xx79.190303140011.l8b1/catalogue/sizzling-pizza-maninagar-ahmedabad-pizza-outlets-24pduifh8i.jpg",
+      name: "Pizza",
+      description: "Having Fun",
+      price: "RS. 50",
+      time: "20 min",
+    },
+    {
+      image:
+        "https://content3.jdmagicbox.com/comp/ahmedabad/b1/079pxx79.xx79.190303140011.l8b1/catalogue/sizzling-pizza-maninagar-ahmedabad-pizza-outlets-24pduifh8i.jpg",
+      name: "Hot Dog",
+      description: "Most wanted fast-food",
+      price: "RS. 30",
+      time: "10 min",
+    },
+    {
+      image:
+        "https://content3.jdmagicbox.com/comp/ahmedabad/b1/079pxx79.xx79.190303140011.l8b1/catalogue/sizzling-pizza-maninagar-ahmedabad-pizza-outlets-24pduifh8i.jpg",
+      name: "Paneer",
+      description: "Having Fun",
+      price: "RS. 50",
+      time: "20 min",
+    },
+    {
+      image:
+        "https://content3.jdmagicbox.com/comp/ahmedabad/b1/079pxx79.xx79.190303140011.l8b1/catalogue/sizzling-pizza-maninagar-ahmedabad-pizza-outlets-24pduifh8i.jpg",
+      name: "Noodles",
+      description: "Most wanted fast-food",
+      price: "RS. 30",
+      time: "10 min",
+    },
+    {
+      image:
+        "https://content3.jdmagicbox.com/comp/ahmedabad/b1/079pxx79.xx79.190303140011.l8b1/catalogue/sizzling-pizza-maninagar-ahmedabad-pizza-outlets-24pduifh8i.jpg",
+      name: "Sweets",
+      description: "Having Fun",
+      price: "RS. 50",
+      time: "20 min",
+    },
+  ];
+  let cont = document.getElementById("cont");
+  localStorage.setItem("menu", JSON.stringify(menu));
+  menu = JSON.parse(localStorage.getItem("menu"));
+  for (let i = 0; i < menu.length; i++) {
+    let a = document.createElement("div");
+    a.setAttribute("id", i);
+    a.setAttribute("class", "list");
+    let img = document.createElement("img");
+    img.src = menu[i].image;
+    let p = document.createElement("p");
+    p.innerHTML = `${menu[i].name}<br/>${menu[i].price}<br/>${menu[i].time}<br/>${menu[i].description}<br/><button onclick="cart(${i})">Add to Cart</button>`;
+    a.append(img, p);
+    cont.append(a);
+  }
+  function cart(id) {
+    let arr;
+    arr = localStorage.getItem("carts");
+    if (arr == null) {
+      arr = [];
+      arr.push(menu[id]);
+      alert("added to cart");
+    } else {
+      alert("added to cart");
+      arr = JSON.parse(arr);
+      arr.push(menu[id]);
+    }
+    localStorage.setItem("carts", JSON.stringify(arr));
+  }
+</script>

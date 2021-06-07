@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LOGIN</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      #nav {
+        height: 50px;
+        background: darkgreen;
+        color: antiquewhite;
+        display: flex;
+        flex-direction: row-reverse;
+      }
+      #nav > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .option {
+        cursor: pointer;
+        margin: 1.5rem;
+      }
+      .option:hover {
+        color: grey;
+      }
+      #cont {
+        width: 50%;
+        margin-left: 25%;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        margin-top: 6rem;
+        border-radius: 20px;
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+      .form > input,
+      button {
+        text-align: center;
+        width: 80%;
+        margin: 0.75rem;
+        padding: 0.25rem;
+        cursor: pointer;
+      }
+      button {
+        background: green;
+        color: aliceblue;
+        width: 30%;
+        border: none;
+      }
+      h2 {
+        margin: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="nav">
+      <div>
+        <p class="option" onclick="login()">LOGIN</p>
+        <p class="option" onclick="signup()">SIGNUP</p>
+        <p class="option" onclick="menu()">MENU</p>
+      </div>
+    </div>
+    <div id="cont">
+      <h2>LOGIN</h2>
+      <form class="form">
+        <input type="email" placeholder="Enter your E-mail" id="email" />
+
+        <input
+          type="password"
+          placeholder="Enter your Password"
+          id="password"
+        />
+        <button onclick="login(event)">LOGIN</button>
+      </form>
+    </div>
+  </body>
+</html>
+<script>
+  function login() {
+    window.location.href = "login.html";
+  }
+  function signup() {
+    window.location.href = "signup.html";
+  }
+  function menu() {
+    window.location.href = "menu.html";
+  }
+  function login(e) {
+    e.preventDefault();
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let value = true;
+    if (email == "" || password == "") {
+      alert("Something is missing!!!");
+    } else {
+      let arr;
+      arr = localStorage.getItem("users");
+      if (arr == null) {
+        alert("First signup before login");
+        window.location.href = "signup.html";
+        return;
+      } else {
+        arr = JSON.parse(arr);
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].email == email && arr[i].password == password) {
+            alert("You have successful logged in");
+            window.location.href = "cart.html";
+            break;
+          }
+        }
+      }
+    }
+  }
+</script>

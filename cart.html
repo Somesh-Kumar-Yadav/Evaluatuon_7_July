@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CART</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      #nav {
+        height: 50px;
+        background: darkgreen;
+        color: antiquewhite;
+        display: flex;
+        flex-direction: row-reverse;
+      }
+      #nav > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .option {
+        cursor: pointer;
+        margin: 1.5rem;
+      }
+      .option:hover {
+        color: grey;
+      }
+      .list {
+        height: 200px;
+        width: 200px;
+        float: left;
+        margin: 10px;
+        text-align: center;
+      }
+      img {
+        height: 100px;
+        width: 200px;
+      }
+      .btn {
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="nav">
+      <div>
+        <p class="option" onclick="login()">LOGIN</p>
+        <p class="option" onclick="signup()">SIGNUP</p>
+        <p class="option" onclick="menu()">MENU</p>
+      </div>
+    </div>
+    <div id="cont"></div>
+    <div id="btn">
+      <button onclick="submit()">SUBMIT ORDER</button>
+    </div>
+  </body>
+</html>
+<script>
+  function login() {
+    window.location.href = "login.html";
+  }
+  function signup() {
+    window.location.href = "signup.html";
+  }
+  function menu() {
+    window.location.href = "menu.html";
+  }
+  let cont = document.getElementById("cont");
+  menu = JSON.parse(localStorage.getItem("carts"));
+  for (let i = 0; i < menu.length; i++) {
+    let a = document.createElement("div");
+    a.setAttribute("id", i);
+    a.setAttribute("class", "list");
+    let img = document.createElement("img");
+    img.src = menu[i].image;
+    let p = document.createElement("p");
+    p.innerHTML = `${menu[i].name}<br/>${menu[i].price}<br/>${menu[i].time}<br/>${menu[i].description}`;
+    a.append(img, p);
+    cont.append(a);
+  }
+  function submit() {
+    alert("Your order is accepted");
+    setTimeout(function () {
+      alert("Your order is being cooked");
+    }, 3000);
+    setTimeout(function () {
+      alert("Your order is ready");
+    }, 8000);
+    setTimeout(function () {
+      alert("Order out for delivery");
+    }, 10000);
+    setTimeout(function () {
+      alert("Order delivered");
+    }, 12000);
+  }
+</script>
